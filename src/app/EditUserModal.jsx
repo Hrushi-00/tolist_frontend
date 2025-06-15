@@ -45,15 +45,21 @@ function EditUserModal({ user, onClose, onUpdate }) {
         },
         body: JSON.stringify(form)
       });
+      const data = await response.json();
 
       if (response.ok) {
         onUpdate(form);
         onClose();
       } else {
-        console.error('Failed to update user');
+        if (response.status === 400) {
+          alert("Email already exists. Please use a different email.");
+        } else {
+          alert("An error occurred. Please try again later.");
+        }
+        console.error("Server Error:", data.error);
       }
-    } catch (error) {
-      console.error('Error updating user:', error);
+      } catch (error) {
+      console.error("Network Error:", error);
     }
   };
 

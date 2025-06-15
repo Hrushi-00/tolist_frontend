@@ -89,7 +89,7 @@ const Contact = () => {
               <th className="px-4 py-2 border">Gender</th>
               <th className="px-4 py-2 border">Language</th>
               <th className="px-4 py-2 border">Email</th>
-              <th className="px-4 py-2 border" colSpan={2}>Action</th>
+              <th className="px-4 py-2  border" colSpan={2}>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -99,22 +99,21 @@ const Contact = () => {
                 <td className="px-4 py-2 border">{user.gender}</td>
                 <td className="px-4 py-2 border">{user.language.join(', ')}</td>
                 <td className="px-4 py-2 border">{user.email}</td>
-                <td className="px-4 py-2 border">
+                <td className="px-4 py-2  border">
                   <button 
                     onClick={() => handleEdit(user)}
                     className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-xs sm:text-sm"
                   >
                     Edit
                   </button>
-                </td>
-                <td className="px-4 py-2 border">
-                  <button 
+                   <button 
                     onClick={() => handleDelete(user._id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-xs sm:text-sm"
+                    className="bg-red-500 md:ml-8  text-white px-3 py-1 rounded hover:bg-red-600 text-xs sm:text-sm"
                   >
                     Delete
                   </button>
                 </td>
+             
               </tr>
             ))}
           </tbody>

@@ -26,27 +26,35 @@ function UserFormModal() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:5000/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form)
-      });
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch('http://localhost:5000/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form),
+    });
 
-      if (response.ok) {
-        console.log("Form Submitted:", form);
-        setShowThankYou(true);
+    if (response.ok) {
+      console.log("Form Submitted:", form);
+      setShowThankYou(true);
+    } else {
+      const data = await response.json();
+      if (response.status === 400) {
+        alert("Email already exists. Please use a different email.");
       } else {
-        console.error('Failed to submit form');
+        alert("An error occurred. Please try again later.");
       }
-    } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error("Server Error:", data.error);
     }
-  };
+  } catch (error) {
+    console.error("Network Error:", error);
+    alert("An error occurred. Please check your connection.");
+  }
+};
+
 
   const closeModal = () => {
     setShowModal(false);
